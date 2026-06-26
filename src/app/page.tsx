@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import LiveFeed from "@/components/LiveFeed";
@@ -20,6 +20,20 @@ export default function Home() {
   const [user, setUser] = useState<string | null>(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
+  const [stars, setStars] = useState<{ id: number; top: string; left: string; size: string; delay: string }[]>([]);
+
+  // Generate stars on client only to prevent hydration mismatch
+  useEffect(() => {
+    // Generate stars initially
+    const generated = Array.from({ length: 45 }).map((_, i) => ({
+      id: i,
+      top: `${Math.random() * 100}%`,
+      left: `${Math.random() * 100}%`,
+      size: `${Math.random() * 2 + 1}px`,
+      delay: `${Math.random() * 5}s`,
+    }));
+    setStars(generated);
+  }, []);
 
   const handleStartEarning = () => {
     if (user) {
@@ -63,7 +77,34 @@ export default function Home() {
       {/* Render Main Content Panel depending on active view route */}
       <main className="flex-grow">
         {currentView === "landing" && (
-          <div className="animate-fade-in">
+          <div className="relative animate-fade-in overflow-hidden">
+            {/* Twinkling Stars Background */}
+            <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
+              {stars.map((star) => (
+                <div
+                  key={star.id}
+                  className="absolute bg-white rounded-full animate-twinkle opacity-30 shadow-[0_0_8px_#ffffff]"
+                  style={{
+                    top: star.top,
+                    left: star.left,
+                    width: star.size,
+                    height: star.size,
+                    animationDelay: star.delay,
+                  }}
+                />
+              ))}
+            </div>
+
+            {/* Rotating glowing border shapes */}
+            {/* Upper right purple rotating rounded rectangle */}
+            <div className="absolute top-[8%] right-[-60px] md:right-[5%] w-60 h-60 border border-accent-purple/35 rounded-[50px] shadow-glow-purple opacity-30 animate-rotate-slow pointer-events-none -z-10" />
+
+            {/* Middle left green rotating rounded rectangle */}
+            <div className="absolute top-[38%] left-[-80px] md:left-[2%] w-72 h-72 border border-accent-green/20 rounded-[60px] shadow-glow-green opacity-20 animate-rotate-slow-reverse pointer-events-none -z-10" />
+
+            {/* Lower right purple rotating rounded rectangle */}
+            <div className="absolute bottom-[22%] right-[-60px] md:right-[4%] w-64 h-64 border border-accent-purple/20 rounded-[55px] shadow-glow-purple opacity-20 animate-rotate-slow pointer-events-none -z-10" />
+
             <Hero onStartEarning={handleStartEarning} />
             <LiveFeed />
             <Stats />

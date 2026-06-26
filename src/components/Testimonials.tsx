@@ -64,11 +64,11 @@ export default function Testimonials() {
       <div className="relative overflow-hidden w-full max-w-3xl mx-auto py-4">
         {/* Review Wrapper */}
         <div
-          className="flex transition-transform duration-500 ease-out"
+          className="flex w-full transition-transform duration-500 ease-out"
           style={{ transform: `translateX(-${activeIndex * 100}%)` }}
         >
           {reviews.map((review, idx) => (
-            <div key={idx} className="min-w-full flex-shrink-0 px-4">
+            <div key={idx} className="w-full flex-shrink-0 px-4">
               <div className="bg-card-bg border border-card-border rounded-3xl p-10 text-center hover:border-accent-purple hover:shadow-glow-purple transition-all duration-300 relative shadow-xl">
                 {/* Quote Icon */}
                 <div className="text-5xl text-accent-purple/10 font-serif absolute top-6 left-10">
