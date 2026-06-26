@@ -2,31 +2,19 @@ export default function Steps() {
   const steps = [
     {
       step: "01",
-      icon: (
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M18 9v3m0 0v3m0-3h3m-3 0h-3m-2-5a4 4 0 11-8 0 4 4 0 018 0zM3 20a6 6 0 0112 0v1H3v-1z" />
-        </svg>
-      ),
+      image: "/register.png",
       title: "Register Free",
       desc: "Sign up in 10 seconds. Get immediate access to your dashboard with no setup fees or investments.",
     },
     {
       step: "02",
-      icon: (
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M9 5H7a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2m-6 9l2 2 4-4" />
-        </svg>
-      ),
+      image: "/task.png",
       title: "Complete Tasks",
       desc: "Select from surveys, play games, test apps, or complete simple tasks. Watch your balance grow in real time.",
     },
     {
       step: "03",
-      icon: (
-        <svg className="w-8 h-8" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth="2">
-          <path strokeLinecap="round" strokeLinejoin="round" d="M12 8c-1.657 0-3 .895-3 2s1.343 2 3 2 3 .895 3 2-1.343 2-3 2m0-8c1.11 0 2.08.402 2.599 1M12 8V7m0 1v8m0 0v1m0-1c-1.11 0-2.08-.402-2.599-1M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-        </svg>
-      ),
+      image: "/payout.png",
       title: "Receive Payouts",
       desc: "Withdraw cash directly via PayPal, Bitcoin, Litecoin, or gift cards. Experience ultra-fast, secure deposits.",
     },
@@ -56,9 +44,13 @@ export default function Steps() {
                 {step.step}
               </div>
 
-              {/* Icon Circle */}
-              <div className="w-20 h-20 rounded-full bg-accent-purple/5 border border-accent-purple/10 text-accent-purple group-hover:text-accent-green group-hover:border-accent-green/30 group-hover:bg-accent-green/5 flex items-center justify-center mx-auto mb-6 transition-all duration-300 transform group-hover:scale-110">
-                {step.icon}
+              {/* Graphic Illustration Container */}
+              <div className="w-24 h-24 flex items-center justify-center mx-auto mb-6 transition-all duration-300 transform group-hover:scale-110">
+                <img 
+                  src={step.image} 
+                  alt={step.title} 
+                  className="w-full h-full object-contain filter drop-shadow-[0_8px_16px_rgba(139,92,246,0.18)] group-hover:drop-shadow-[0_12px_24px_rgba(16,185,129,0.28)]"
+                />
               </div>
 
               <h3 className="text-xl font-bold font-display text-text-primary mb-3">

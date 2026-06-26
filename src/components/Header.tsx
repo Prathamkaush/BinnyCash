@@ -12,6 +12,30 @@ interface HeaderProps {
   onOpenSignUp: () => void;
 }
 
+const LANGUAGES = [
+  { code: "en", name: "English", flag: "https://flagcdn.com/w40/us.png" },
+  { code: "hi", name: "Hindi", flag: "https://flagcdn.com/w40/in.png" },
+  { code: "bn", name: "Bengali", flag: "https://flagcdn.com/w40/bd.png" },
+  { code: "es", name: "Spanish", flag: "https://flagcdn.com/w40/es.png" },
+  { code: "fr", name: "French", flag: "https://flagcdn.com/w40/fr.png" },
+  { code: "de", name: "German", flag: "https://flagcdn.com/w40/de.png" },
+  { code: "ar", name: "Arabic", flag: "https://flagcdn.com/w40/sa.png" },
+  { code: "pt", name: "Portuguese", flag: "https://flagcdn.com/w40/pt.png" },
+  { code: "ru", name: "Russian", flag: "https://flagcdn.com/w40/ru.png" },
+  { code: "zh", name: "Chinese (Simplified)", flag: "https://flagcdn.com/w40/cn.png" },
+  { code: "ja", name: "Japanese", flag: "https://flagcdn.com/w40/jp.png" },
+  { code: "it", name: "Italian", flag: "https://flagcdn.com/w40/it.png" },
+  { code: "pl", name: "Polish", flag: "https://flagcdn.com/w40/pl.png" },
+  { code: "tr", name: "Turkish", flag: "https://flagcdn.com/w40/tr.png" },
+  { code: "sv", name: "Swedish", flag: "https://flagcdn.com/w40/se.png" },
+  { code: "da", name: "Danish", flag: "https://flagcdn.com/w40/dk.png" },
+  { code: "nl", name: "Dutch", flag: "https://flagcdn.com/w40/nl.png" },
+  { code: "ko", name: "Korean", flag: "https://flagcdn.com/w40/kr.png" },
+  { code: "th", name: "Thai", flag: "https://flagcdn.com/w40/th.png" },
+  { code: "id", name: "Indonesian", flag: "https://flagcdn.com/w40/id.png" },
+  { code: "vi", name: "Vietnamese", flag: "https://flagcdn.com/w40/vn.png" },
+];
+
 export default function Header({
   currentView,
   setView,
@@ -21,8 +45,10 @@ export default function Header({
   onOpenSignUp,
 }: HeaderProps) {
   const [isScrolled, setIsScrolled] = useState(false);
-  const [theme, setTheme] = useState<"dark" | "light">("dark");
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const [isLanguageOpen, setIsLanguageOpen] = useState(false);
+  const [currentLanguage, setCurrentLanguage] = useState("en");
+  const [toast, setToast] = useState<string | null>(null);
 
   useEffect(() => {
     const handleScroll = () => {
@@ -37,37 +63,52 @@ export default function Header({
     return () => window.removeEventListener("scroll", handleScroll);
   }, []);
 
-  // Initialize theme from system preference or localStorage
+  // Lock to dark theme and initialize language on mount
   useEffect(() => {
-    const storedTheme = localStorage.getItem("binny-theme") as "dark" | "light" | null;
     const body = document.body;
-    if (storedTheme) {
-      setTheme(storedTheme);
-      if (storedTheme === "light") {
-        body.classList.add("light-theme");
-      } else {
-        body.classList.remove("light-theme");
-      }
-    } else {
-      const prefersLight = window.matchMedia("(prefers-color-scheme: light)").matches;
-      setTheme(prefersLight ? "light" : "dark");
-      if (prefersLight) {
-        body.classList.add("light-theme");
-      }
+    body.classList.remove("light-theme");
+    localStorage.setItem("binny-theme", "dark");
+
+    const storedLang = localStorage.getItem("binny-lang");
+    if (storedLang) {
+      setCurrentLanguage(storedLang);
     }
   }, []);
 
-  const toggleTheme = () => {
-    const body = document.body;
-    if (theme === "dark") {
-      setTheme("light");
-      body.classList.add("light-theme");
-      localStorage.setItem("binny-theme", "light");
-    } else {
-      setTheme("dark");
-      body.classList.remove("light-theme");
-      localStorage.setItem("binny-theme", "dark");
+  // Close modal on escape key
+  useEffect(() => {
+    if (!isLanguageOpen) return;
+    const handleKeyDown = (e: KeyboardEvent) => {
+      if (e.key === "Escape") {
+        setIsLanguageOpen(false);
+      }
+    };
+    window.addEventListener("keydown", handleKeyDown);
+    return () => window.removeEventListener("keydown", handleKeyDown);
+  }, [isLanguageOpen]);
+
+  // Handle toast self-dismissal
+  useEffect(() => {
+    if (toast) {
+      const timer = setTimeout(() => {
+        setToast(null);
+      }, 3000);
+      return () => clearTimeout(timer);
     }
+  }, [toast]);
+
+  const handleLanguageSelect = (code: string) => {
+    setCurrentLanguage(code);
+    localStorage.setItem("binny-lang", code);
+
+    const selected = LANGUAGES.find((lang) => lang.code === code);
+    if (selected) {
+      setToast(`Language switched to ${selected.name}`);
+    }
+
+    setTimeout(() => {
+      setIsLanguageOpen(false);
+    }, 300);
   };
 
   const navigateTo = (view: string) => {
@@ -141,14 +182,18 @@ export default function Header({
             </a>
           </nav>
 
-          {/* Nav Actions (Theme Switcher, Login/Logout CTAs) */}
+          {/* Nav Actions (Language Selector, Login/Logout CTAs) */}
           <div className="hidden md:flex items-center gap-4">
             <button
-              onClick={toggleTheme}
-              aria-label="Toggle Theme"
-              className="w-10 h-10 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary hover:border-accent-purple hover:shadow-glow-purple transition-all duration-300"
+              onClick={() => setIsLanguageOpen(true)}
+              aria-label="Choose Language"
+              className="w-10 h-10 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary hover:border-accent-purple hover:shadow-glow-purple transition-all duration-300 cursor-pointer"
             >
-              {theme === "dark" ? "☀️" : "🌙"}
+              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                <path d="M2 12h20" />
+              </svg>
             </button>
 
             {user ? (
@@ -187,11 +232,15 @@ export default function Header({
           {/* Hamburger Mobile Toggle */}
           <div className="flex items-center gap-3 md:hidden">
             <button
-              onClick={toggleTheme}
-              aria-label="Toggle Theme"
-              className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary text-sm hover:border-accent-purple transition-all"
+              onClick={() => setIsLanguageOpen(true)}
+              aria-label="Choose Language"
+              className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary text-sm hover:border-accent-purple transition-all cursor-pointer"
             >
-              {theme === "dark" ? "☀️" : "🌙"}
+              <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <path d="M12 2a14.5 14.5 0 0 0 0 20 14.5 14.5 0 0 0 0-20" />
+                <path d="M2 12h20" />
+              </svg>
             </button>
             <button
               onClick={() => setIsMobileMenuOpen(true)}
@@ -307,6 +356,86 @@ export default function Header({
           onClick={() => setIsMobileMenuOpen(false)}
           className="fixed inset-0 z-30 bg-black/50 backdrop-blur-sm"
         />
+      )}
+
+      {/* Toast Notification */}
+      {toast && (
+        <div className="fixed bottom-6 right-6 z-50 bg-bg-tertiary border border-accent-green rounded-xl px-5 py-3 shadow-[0_4px_20px_rgba(0,0,0,0.5)] flex items-center gap-3 animate-fade-in">
+          <span className="text-accent-green text-lg font-bold">✓</span>
+          <span className="text-sm font-semibold text-text-primary">{toast}</span>
+        </div>
+      )}
+
+      {/* Language Selection Modal */}
+      {isLanguageOpen && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-md animate-fade-in transition-all duration-300">
+          <div 
+            onClick={() => setIsLanguageOpen(false)} 
+            className="absolute inset-0"
+          />
+          <div className="relative w-full max-w-3xl bg-bg-secondary border border-card-border rounded-2xl md:rounded-3xl p-6 md:p-8 shadow-2xl overflow-hidden animate-scale-in max-h-[85vh] flex flex-col">
+            
+            {/* Background glowing effects to match BinnyCash premium aesthetics */}
+            <div className="absolute -top-40 -right-40 w-80 h-80 bg-accent-purple/10 rounded-full blur-[100px] pointer-events-none" />
+            <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-accent-green/10 rounded-full blur-[100px] pointer-events-none" />
+
+            {/* Header */}
+            <div className="flex items-center justify-between mb-6 relative z-10">
+              <div>
+                <h3 className="text-xl md:text-2xl font-bold font-display text-text-primary">
+                  Choose your language
+                </h3>
+                <p className="text-xs md:text-sm text-text-secondary mt-1 font-sans">
+                  Popular languages
+                </p>
+              </div>
+              <button
+                onClick={() => setIsLanguageOpen(false)}
+                className="w-10 h-10 rounded-xl bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary hover:border-accent-purple hover:text-accent-purple transition-all cursor-pointer font-bold"
+                aria-label="Close modal"
+              >
+                ✕
+              </button>
+            </div>
+
+            {/* Scrollable Language Grid */}
+            <div className="overflow-y-auto pr-2 relative z-10 flex-1 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3.5 scrollbar-thin">
+              {LANGUAGES.map((lang) => {
+                const isSelected = currentLanguage === lang.code;
+                return (
+                  <button
+                    key={lang.code}
+                    onClick={() => handleLanguageSelect(lang.code)}
+                    className={`flex items-center justify-between p-3.5 rounded-xl border transition-all duration-300 text-left w-full cursor-pointer bg-bg-tertiary/20 ${
+                      isSelected
+                        ? "border-accent-green bg-accent-green/5 shadow-[0_0_15px_rgba(16,185,129,0.1)]"
+                        : "border-card-border hover:border-accent-purple/50 hover:bg-bg-tertiary/40"
+                    }`}
+                  >
+                    <div className="flex items-center gap-3">
+                      <img
+                        src={lang.flag}
+                        alt={`${lang.name} flag`}
+                        className="w-6 h-4.5 object-cover rounded shadow-sm border border-white/10"
+                        loading="lazy"
+                      />
+                      <span className={`text-sm font-semibold transition-colors ${
+                        isSelected ? "text-white" : "text-text-secondary"
+                      }`}>
+                        {lang.name}
+                      </span>
+                    </div>
+                    {isSelected && (
+                      <span className="w-5 h-5 rounded-full bg-accent-green/20 border border-accent-green flex items-center justify-center text-accent-green text-[10px] font-bold">
+                        ✓
+                      </span>
+                    )}
+                  </button>
+                );
+              })}
+            </div>
+          </div>
+        </div>
       )}
     </>
   );

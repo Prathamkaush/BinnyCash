@@ -149,6 +149,10 @@ export default function Home() {
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
         onSuccess={handleLoginSuccess}
+        onToggle={() => {
+          setIsLoginOpen(false);
+          setIsSignUpOpen(true);
+        }}
       />
 
       {/* Sign Up Overlay Modal */}
@@ -156,6 +160,10 @@ export default function Home() {
         isOpen={isSignUpOpen}
         onClose={() => setIsSignUpOpen(false)}
         onSuccess={handleSignUpSuccess}
+        onToggle={() => {
+          setIsSignUpOpen(false);
+          setIsLoginOpen(true);
+        }}
       />
     </div>
   );
