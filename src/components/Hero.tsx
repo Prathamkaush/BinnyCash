@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Sparkles, FileText, Gamepad2, Check, Lock, Play, Star, Rocket } from "lucide-react";
+import { translations } from "@/utils/translations";
 
 // Custom Brand Logo and Asset Components
 const PayPalIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
@@ -46,18 +47,21 @@ const RunningIcon = ({ className = "w-10 h-10" }: { className?: string }) => (
 
 interface HeroProps {
   onStartEarning: () => void;
+  language?: string;
 }
 
-export default function Hero({ onStartEarning }: HeroProps) {
+export default function Hero({ onStartEarning, language = "en" }: HeroProps) {
   const [typedText, setTypedText] = useState("");
   const [phraseIndex, setPhraseIndex] = useState(0);
   const [isDeleting, setIsDeleting] = useState(false);
 
+  const t = translations[language] || translations["en"];
+
   const phrases = [
-    "Taking Surveys",
-    "Playing Games",
-    "Testing Apps",
-    "Completing Offers",
+    t.phrase_surveys,
+    t.phrase_games,
+    t.phrase_apps,
+    t.phrase_offers,
   ];
 
   useEffect(() => {
@@ -99,12 +103,12 @@ export default function Hero({ onStartEarning }: HeroProps) {
             {/* Earning Platform Badge */}
             <div className="inline-flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-[#130f26]/80 border border-[#8b5cf6]/20 text-xs font-semibold text-text-primary tracking-wide shadow-lg backdrop-blur-sm">
               <Sparkles className="w-3.5 h-3.5 text-amber-400 fill-amber-400 animate-pulse" />
-              <span>BinnyCash is a global earning platform</span>
+              <span>{t.hero_badge}</span>
             </div>
 
             {/* Heading */}
             <h1 className="text-4xl md:text-5.5xl font-black font-display text-text-primary leading-tight">
-              Earn Real Money By <br />
+              {t.hero_title} <br />
               <span className="bg-gradient-to-r from-accent-purple to-accent-green bg-clip-text text-transparent inline-block border-r-3 border-accent-green pr-1.5 animate-caret">
                 {typedText}
               </span>
@@ -112,13 +116,13 @@ export default function Hero({ onStartEarning }: HeroProps) {
 
             {/* Subtitle */}
             <p className="text-base md:text-lg text-text-secondary max-w-xl leading-relaxed">
-              Earn money by testing apps, games and taking surveys. Earn up to $50.40 per offer. Get started today!
+              {t.hero_subtitle}
             </p>
 
             {/* Dynamic Country/Offers Info */}
             <div className="flex items-center gap-2 text-sm text-text-secondary">
               <span className="w-2 h-2 rounded-full bg-accent-green animate-pulse" />
-              <span>59+ offers available in</span>
+              <span>{t.hero_offers}</span>
               <img
                 src="https://flagcdn.com/w20/in.png"
                 alt="India flag"
@@ -133,19 +137,19 @@ export default function Hero({ onStartEarning }: HeroProps) {
                 onClick={onStartEarning}
                 className="w-full sm:w-auto px-8 py-4 bg-gradient-to-r from-accent-purple to-[#6d28d9] hover:opacity-90 text-white font-bold rounded-2xl shadow-glow-purple transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer flex items-center justify-center gap-2"
               >
-                <Rocket className="w-5 h-5 text-white" /> Start Earning
+                <Rocket className="w-5 h-5 text-white" /> {t.hero_start_earning}
               </button>
               <a
                 href="#how-it-works"
                 className="w-full sm:w-auto px-8 py-4 bg-transparent text-text-primary hover:border-accent-purple border border-card-border font-semibold rounded-2xl text-center hover:shadow-glow-purple transition-all duration-300 transform hover:-translate-y-0.5"
               >
-                How it works
+                {t.hero_how_it_works}
               </a>
             </div>
 
             {/* Sub-caption */}
             <p className="text-xs text-text-muted mt-1">
-              Start earning today. Withdraw anytime.
+              {t.hero_withdraw}
             </p>
           </div>
 

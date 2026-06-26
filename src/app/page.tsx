@@ -21,6 +21,18 @@ export default function Home() {
   const [isLoginOpen, setIsLoginOpen] = useState(false);
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [stars, setStars] = useState<{ id: number; top: string; left: string; size: string; delay: string }[]>([]);
+  const [language, setLanguage] = useState<string>("en");
+
+  // Read initial language on mount
+  useEffect(() => {
+    const savedLang = localStorage.getItem("binny-lang") || "en";
+    setLanguage(savedLang);
+  }, []);
+
+  const handleLanguageSelect = (code: string) => {
+    setLanguage(code);
+    localStorage.setItem("binny-lang", code);
+  };
 
   // Generate stars on client only to prevent hydration mismatch
   useEffect(() => {
@@ -72,6 +84,8 @@ export default function Home() {
         onLogout={handleLogout}
         onOpenLogin={() => setIsLoginOpen(true)}
         onOpenSignUp={() => setIsSignUpOpen(true)}
+        currentLanguage={language}
+        onLanguageSelect={handleLanguageSelect}
       />
 
       {/* Render Main Content Panel depending on active view route */}
@@ -123,10 +137,10 @@ export default function Home() {
               </svg>
             </div>
 
-            <Hero onStartEarning={handleStartEarning} />
+            <Hero onStartEarning={handleStartEarning} language={language} />
             <LiveFeed />
             <Stats />
-            <Steps />
+            <Steps language={language} />
             <Categories onStartEarning={handleStartEarning} />
             <ValueProps />
             <Testimonials />

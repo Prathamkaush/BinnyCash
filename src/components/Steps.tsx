@@ -1,22 +1,30 @@
-export default function Steps() {
+import { translations } from "@/utils/translations";
+
+interface StepsProps {
+  language?: string;
+}
+
+export default function Steps({ language = "en" }: StepsProps) {
+  const t = translations[language] || translations["en"];
+
   const steps = [
     {
       step: "01",
       image: "/register.png",
-      title: "Register Free",
-      desc: "Sign up in 10 seconds. Get immediate access to your dashboard with no setup fees or investments.",
+      title: t.step1_title,
+      desc: t.step1_desc,
     },
     {
       step: "02",
       image: "/task.png",
-      title: "Complete Tasks",
-      desc: "Select from surveys, play games, test apps, or complete simple tasks. Watch your balance grow in real time.",
+      title: t.step2_title,
+      desc: t.step2_desc,
     },
     {
       step: "03",
       image: "/payout.png",
-      title: "Receive Payouts",
-      desc: "Withdraw cash directly via PayPal, Bitcoin, Litecoin, or gift cards. Experience ultra-fast, secure deposits.",
+      title: t.step3_title,
+      desc: t.step3_desc,
     },
   ];
 
@@ -24,12 +32,12 @@ export default function Steps() {
     <section id="how-it-works" className="w-full bg-bg-secondary/40 border-y border-card-border py-20 px-6">
       <div className="max-w-7xl mx-auto">
         <div className="text-center mb-16">
-          <span className="text-xs uppercase tracking-widest text-accent-purple font-bold">SIMPLE ONBOARDING</span>
+          <span className="text-xs uppercase tracking-widest text-accent-purple font-bold">{t.steps_badge}</span>
           <h2 className="text-3xl md:text-4.5xl font-extrabold font-display text-text-primary mt-2">
-            How BinnyCash Works
+            {t.steps_title}
           </h2>
           <p className="text-sm md:text-base text-text-secondary max-w-lg mx-auto mt-4 leading-relaxed">
-            Follow these three simple steps to start turning your free time into cash rewards.
+            {t.steps_subtitle}
           </p>
         </div>
 
