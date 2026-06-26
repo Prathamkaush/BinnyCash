@@ -1,0 +1,104 @@
+@import "tailwindcss";
+
+:root {
+  /* Dark Mode Variables (Default) */
+  --bg-primary: #09070f;
+  --bg-secondary: #120e21;
+  --bg-tertiary: #1b1532;
+  --text-primary: #ffffff;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  
+  --accent-purple: #8b5cf6;
+  --accent-green: #10b981;
+  
+  --card-bg: rgba(20, 16, 36, 0.55);
+  --card-border: rgba(139, 92, 246, 0.15);
+  --card-border-hover: rgba(16, 185, 129, 0.3);
+  --card-shadow: rgba(0, 0, 0, 0.4);
+  
+  --input-bg: rgba(13, 10, 24, 0.7);
+  --input-border: rgba(139, 92, 246, 0.25);
+}
+
+.light-theme {
+  /* Light Mode Variables */
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  
+  --accent-purple: #6d28d9;
+  --accent-green: #059669;
+  
+  --card-bg: rgba(255, 255, 255, 0.85);
+  --card-border: rgba(109, 40, 217, 0.08);
+  --card-border-hover: rgba(5, 150, 105, 0.2);
+  --card-shadow: rgba(15, 23, 42, 0.06);
+  
+  --input-bg: #f8fafc;
+  --input-border: rgba(109, 40, 217, 0.15);
+}
+
+@theme inline {
+  --color-bg-primary: var(--bg-primary);
+  --color-bg-secondary: var(--bg-secondary);
+  --color-bg-tertiary: var(--bg-tertiary);
+  --color-text-primary: var(--text-primary);
+  --color-text-secondary: var(--text-secondary);
+  --color-text-muted: var(--text-muted);
+  --color-accent-purple: var(--accent-purple);
+  --color-accent-green: var(--accent-green);
+  --color-card-bg: var(--card-bg);
+  --color-card-border: var(--card-border);
+  --color-card-border-hover: var(--card-border-hover);
+  --color-card-shadow: var(--card-shadow);
+  --color-input-bg: var(--input-bg);
+  --color-input-border: var(--input-border);
+  
+  --shadow-glow-purple: 0 0 20px rgba(139, 92, 246, 0.35);
+  --shadow-glow-green: 0 0 20px rgba(16, 185, 129, 0.35);
+}
+
+/* Animations & Custom Adjustments */
+@keyframes ticker-slide {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+@keyframes blink-caret {
+  from, to { border-color: transparent }
+  50% { border-color: var(--accent-green) }
+}
+
+.animate-ticker {
+  animation: ticker-slide 35s linear infinite;
+}
+
+.animate-caret {
+  animation: blink-caret 0.75s step-end infinite;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track {
+  background: var(--bg-primary);
+}
+::-webkit-scrollbar-thumb {
+  background: var(--bg-tertiary);
+  border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--accent-purple);
+}
+
+body {
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  transition: background-color 0.4s ease, color 0.3s ease;
+}
