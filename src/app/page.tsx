@@ -77,7 +77,7 @@ export default function Home() {
       {/* Render Main Content Panel depending on active view route */}
       <main className="flex-grow">
         {currentView === "landing" && (
-          <div className="relative animate-fade-in overflow-hidden">
+          <div className="relative isolate animate-fade-in overflow-hidden">
             {/* Twinkling Stars Background */}
             <div className="absolute inset-0 pointer-events-none overflow-hidden z-0">
               {stars.map((star) => (
@@ -95,15 +95,33 @@ export default function Home() {
               ))}
             </div>
 
-            {/* Rotating glowing border shapes */}
-            {/* Upper right purple rotating rounded rectangle */}
-            <div className="absolute top-[8%] right-[-60px] md:right-[5%] w-60 h-60 border border-accent-purple/35 rounded-[50px] shadow-glow-purple opacity-30 animate-rotate-slow pointer-events-none -z-10" />
+            {/* Rotating glowing border shapes in background (thicker green borders) */}
+            {/* Shape 1: Rounded Square with Green Border (Upper Right) */}
+            <div className="absolute top-[8%] right-[-50px] md:right-[5%] w-56 h-56 border-2 border-accent-green/60 rounded-[50px] shadow-glow-green opacity-40 animate-rotate-slow pointer-events-none -z-10" />
 
-            {/* Middle left green rotating rounded rectangle */}
-            <div className="absolute top-[38%] left-[-80px] md:left-[2%] w-72 h-72 border border-accent-green/20 rounded-[60px] shadow-glow-green opacity-20 animate-rotate-slow-reverse pointer-events-none -z-10" />
+            {/* Shape 2: Dashed Circle with Green Border (Middle Left) */}
+            <div className="absolute top-[35%] left-[-40px] md:left-[2%] w-48 h-48 border-2 border-dashed border-accent-green/50 rounded-full shadow-glow-green opacity-40 animate-rotate-slow-reverse pointer-events-none -z-10" />
 
-            {/* Lower right purple rotating rounded rectangle */}
-            <div className="absolute bottom-[22%] right-[-60px] md:right-[4%] w-64 h-64 border border-accent-purple/20 rounded-[55px] shadow-glow-purple opacity-20 animate-rotate-slow pointer-events-none -z-10" />
+            {/* Shape 3: 4-Pointed Star matching Logo (Lower Right) */}
+            <div className="absolute bottom-[22%] right-[-50px] md:right-[6%] w-52 h-52 animate-rotate-slow pointer-events-none -z-10">
+              <svg className="w-full h-full text-accent-green/60 filter drop-shadow-[0_0_15px_rgba(16,185,129,0.4)]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 2L15 9L22 12L15 15L12 22L9 15L2 12L9 9Z" />
+              </svg>
+            </div>
+
+            {/* Shape 4: Hexagon with Purple/Green Border (Middle Right) */}
+            <div className="absolute top-[58%] right-[-40px] md:right-[15%] w-40 h-40 animate-rotate-slow-reverse pointer-events-none -z-10">
+              <svg className="w-full h-full text-accent-green/50 filter drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 2l8.66 5v10L12 22l-8.66-5V7z" />
+              </svg>
+            </div>
+
+            {/* Shape 5: Triangle with Green Border (Lower Left) */}
+            <div className="absolute bottom-[10%] left-[-30px] md:left-[5%] w-36 h-36 animate-rotate-slow pointer-events-none -z-10">
+              <svg className="w-full h-full text-accent-green/50 filter drop-shadow-[0_0_15px_rgba(16,185,129,0.3)]" fill="none" stroke="currentColor" strokeWidth="2" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" d="M12 3l10 17H2L12 3z" />
+              </svg>
+            </div>
 
             <Hero onStartEarning={handleStartEarning} />
             <LiveFeed />
