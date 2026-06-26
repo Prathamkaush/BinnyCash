@@ -16,6 +16,44 @@ interface Task {
   completed: boolean;
 }
 
+const AstroUserAvatar = () => (
+  <svg viewBox="0 0 64 64" className="w-full h-full" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="32" cy="32" r="30" fill="url(#userGrad)" stroke="#10b981" strokeWidth="2" />
+    <defs>
+      <radialGradient id="userGrad" cx="50%" cy="30%" r="75%">
+        <stop offset="0%" stopColor="#111827" />
+        <stop offset="100%" stopColor="#030712" />
+      </radialGradient>
+    </defs>
+    
+    {/* Space Bunny Ears */}
+    <path d="M22 26 C18 8 24 4 27 16 C28 20 27 26 27 26" fill="#f9fafb" stroke="#374151" strokeWidth="1.5" />
+    <path d="M22.5 22 C19.5 10 23 8 25 16" fill="#10b981" />
+    <path d="M42 26 C46 8 40 4 37 16 C36 20 37 26 37 26" fill="#f9fafb" stroke="#374151" strokeWidth="1.5" />
+    <path d="M41.5 22 C44.5 10 41 8 39 16" fill="#10b981" />
+    
+    {/* Suit / Body */}
+    <path d="M16 54 C16 44 22 40 32 40 C42 40 48 44 48 54" fill="#1f2937" stroke="#10b981" strokeWidth="1.5" />
+    <path d="M26 40 L38 40 L35 48 L29 48 Z" fill="#10b981" />
+    <circle cx="32" cy="45" r="2.5" fill="#fcd34d" />
+
+    {/* Head */}
+    <circle cx="32" cy="32" r="13" fill="#f9fafb" stroke="#e5e7eb" strokeWidth="1" />
+    
+    {/* Face Details */}
+    <circle cx="28" cy="31" r="1.5" fill="#111827" />
+    <circle cx="36" cy="31" r="1.5" fill="#111827" />
+    <path d="M31 34 L33 34 L32 35.5 Z" fill="#f472b6" />
+    {/* Cheeks */}
+    <circle cx="26" cy="34" r="1.5" fill="#f472b6" opacity="0.4" />
+    <circle cx="38" cy="34" r="1.5" fill="#f472b6" opacity="0.4" />
+
+    {/* Space Helmet Visor - Glowing gold/green */}
+    <ellipse cx="32" cy="32" rx="17" ry="14" fill="rgba(16, 185, 129, 0.15)" stroke="#10b981" strokeWidth="2" />
+    <path d="M22 26 A 13 11 0 0 1 42 26" stroke="white" strokeWidth="1.5" strokeLinecap="round" opacity="0.7" />
+  </svg>
+);
+
 export default function Dashboard({ user }: DashboardProps) {
   const [balance, setBalance] = useState(12.5);
   const [activeTab, setActiveTab] = useState<"tasks" | "withdraw" | "refer">("tasks");
@@ -100,8 +138,8 @@ export default function Dashboard({ user }: DashboardProps) {
           <div className="bg-gradient-to-br from-bg-secondary to-bg-tertiary border border-card-border rounded-3xl p-6 shadow-xl">
             {/* User Profile Widget */}
             <div className="flex items-center gap-4 border-b border-white/5 pb-5 mb-5">
-              <div className="w-14 h-14 rounded-full bg-accent-purple/20 flex items-center justify-center text-white border-2 border-accent-green shadow-glow-green text-xl font-bold">
-                {user.substring(0, 2).toUpperCase()}
+              <div className="w-14 h-14 rounded-full overflow-hidden border-2 border-accent-green shadow-glow-green bg-[#111827] flex items-center justify-center flex-shrink-0">
+                <AstroUserAvatar />
               </div>
               <div>
                 <h3 className="text-lg font-bold font-display text-text-primary">

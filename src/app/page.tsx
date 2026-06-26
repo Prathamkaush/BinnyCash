@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { Rocket } from "lucide-react";
 import Header from "@/components/Header";
 import Hero from "@/components/Hero";
 import LiveFeed from "@/components/LiveFeed";
@@ -13,7 +14,7 @@ import FaqAccordion from "@/components/FaqAccordion";
 import Footer from "@/components/Footer";
 import AboutUs from "@/components/AboutUs";
 import Dashboard from "@/components/Dashboard";
-import { LoginModal, SignUpModal } from "@/components/Modals";
+import { LoginModal, SignUpModal, ComingSoonModal } from "@/components/Modals";
 
 export default function Home() {
   const [currentView, setView] = useState<string>("landing");
@@ -22,12 +23,50 @@ export default function Home() {
   const [isSignUpOpen, setIsSignUpOpen] = useState(false);
   const [stars, setStars] = useState<{ id: number; top: string; left: string; size: string; delay: string }[]>([]);
   const [language, setLanguage] = useState<string>("en");
+  const [comingSoonFeature, setComingSoonFeature] = useState<string | null>(null);
+  const [showStickyCTA, setShowStickyCTA] = useState(false);
+  const [pendingScrollAnchor, setPendingScrollAnchor] = useState<string | null>(null);
 
   // Read initial language on mount
   useEffect(() => {
     const savedLang = localStorage.getItem("binny-lang") || "en";
     setLanguage(savedLang);
   }, []);
+
+  // Listen to window scroll to show/hide sticky CTA
+  useEffect(() => {
+    const handleScroll = () => {
+      setShowStickyCTA(window.scrollY > 500);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Scroll to anchor on landing view transition if pending
+  useEffect(() => {
+    if (currentView === "landing" && pendingScrollAnchor) {
+      const timer = setTimeout(() => {
+        const element = document.getElementById(pendingScrollAnchor);
+        if (element) {
+          element.scrollIntoView({ behavior: "smooth" });
+          setPendingScrollAnchor(null);
+        }
+      }, 150);
+      return () => clearTimeout(timer);
+    }
+  }, [currentView, pendingScrollAnchor]);
+
+  const handleAnchorClick = (anchorId: string) => {
+    if (currentView !== "landing") {
+      setPendingScrollAnchor(anchorId);
+      setView("landing");
+    } else {
+      const element = document.getElementById(anchorId);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  };
 
   const handleLanguageSelect = (code: string) => {
     setLanguage(code);
@@ -156,13 +195,18 @@ export default function Home() {
       </main>
 
       {/* Footer Area */}
-      <Footer setView={setView} />
+      <Footer
+        setView={setView}
+        onComingSoon={setComingSoonFeature}
+        onAnchorClick={handleAnchorClick}
+      />
 
       {/* Login Overlay Modal */}
       <LoginModal
         isOpen={isLoginOpen}
         onClose={() => setIsLoginOpen(false)}
         onSuccess={handleLoginSuccess}
+        onComingSoon={setComingSoonFeature}
         onToggle={() => {
           setIsLoginOpen(false);
           setIsSignUpOpen(true);
@@ -174,11 +218,35 @@ export default function Home() {
         isOpen={isSignUpOpen}
         onClose={() => setIsSignUpOpen(false)}
         onSuccess={handleSignUpSuccess}
+        onComingSoon={setComingSoonFeature}
         onToggle={() => {
           setIsSignUpOpen(false);
           setIsLoginOpen(true);
         }}
       />
+
+      {/* Coming Soon Modal */}
+      <ComingSoonModal
+        isOpen={comingSoonFeature !== null}
+        onClose={() => setComingSoonFeature(null)}
+        featureName={comingSoonFeature || ""}
+      />
+
+      {/* Sticky Call-To-Action Button on Scroll */}
+      {currentView === "landing" && showStickyCTA && (
+        <div className="fixed bottom-6 right-6 md:right-8 z-40 animate-slide-up">
+          <button
+            onClick={handleStartEarning}
+            className="flex items-center gap-2.5 px-6 py-4 bg-gradient-to-r from-accent-purple via-[#6d28d9] to-accent-green hover:opacity-95 text-white font-extrabold text-sm sm:text-base rounded-2xl shadow-[0_8px_32px_rgba(139,92,246,0.35)] border border-[#a78bfa]/30 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 active:translate-y-0 active:scale-100 cursor-pointer"
+          >
+            <Rocket className="w-4.5 h-4.5 sm:w-5 sm:h-5 text-white animate-pulse" />
+            <span>Start Earning</span>
+            <span className="bg-white/20 text-[10px] sm:text-xs px-2 py-0.5 rounded-full font-bold">
+              +$60.00 Max
+            </span>
+          </button>
+        </div>
+      )}
     </div>
   );
 }

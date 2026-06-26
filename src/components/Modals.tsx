@@ -1,6 +1,7 @@
 "use client";
 
 import { useState } from "react";
+import Image from "next/image";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 
 interface ModalProps {
@@ -8,6 +9,7 @@ interface ModalProps {
   onClose: () => void;
   onSuccess: (username: string) => void;
   onToggle?: () => void;
+  onComingSoon?: (feature: string) => void;
 }
 
 const GoogleIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
@@ -19,7 +21,7 @@ const GoogleIcon = ({ className = "w-5 h-5" }: { className?: string }) => (
   </svg>
 );
 
-export function LoginModal({ isOpen, onClose, onSuccess, onToggle }: ModalProps) {
+export function LoginModal({ isOpen, onClose, onSuccess, onToggle, onComingSoon }: ModalProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -94,13 +96,12 @@ export function LoginModal({ isOpen, onClose, onSuccess, onToggle }: ModalProps)
           <div className="flex flex-col gap-2">
             <div className="flex items-center justify-between">
               <label className="text-sm font-semibold text-text-primary">Password</label>
-
             </div>
             <div className="relative flex items-center">
               <Lock className="absolute left-4 w-4.5 h-4.5 text-text-muted" />
               <input
                 type={showPassword ? "text" : "password"}
-                placeholder="Enter password"
+                placeholder="Password"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 className="w-full bg-[#130f24] border border-[#2b214a] rounded-xl py-3.5 pl-11 pr-12 text-sm text-text-primary placeholder:text-text-muted focus:border-accent-purple focus:shadow-glow-purple focus:bg-bg-primary transition-all duration-200 outline-none"
@@ -108,37 +109,53 @@ export function LoginModal({ isOpen, onClose, onSuccess, onToggle }: ModalProps)
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-4 text-text-muted hover:text-text-primary cursor-pointer transition-colors"
+                className="absolute right-4 text-text-secondary hover:text-text-primary cursor-pointer transition-colors"
               >
                 {showPassword ? <EyeOff className="w-4.5 h-4.5" /> : <Eye className="w-4.5 h-4.5" />}
               </button>
-
             </div>
+          </div>
+
+          {/* Remember & Forgot Password Mockup */}
+          <div className="flex items-center justify-between text-xs font-semibold text-text-secondary mt-1">
+            <label className="flex items-center gap-2 cursor-pointer select-none">
+              <input type="checkbox" className="accent-accent-purple rounded" />
+              <span>Remember me</span>
+            </label>
             <button
               type="button"
-              className="text-xs font-semibold mt-2 text-accent-purple hover:text-[#a78bfa] transition-colors"
-              onClick={() => { }}
+              onClick={() => onComingSoon?.("Forgot Password Recovery")}
+              className="text-accent-purple hover:underline hover:text-[#a78bfa] transition-colors cursor-pointer bg-transparent border-none"
             >
               Forgot your password?
             </button>
           </div>
 
-          {/* Submit Sign In */}
+          {/* Submit Button */}
           <button
             type="submit"
             disabled={isLoading}
-            className="w-full mt-2 bg-accent-purple hover:bg-[#7c3aed] text-white py-3.5 rounded-xl font-bold text-sm transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer shadow-glow-purple"
+            className="w-full bg-accent-purple hover:bg-[#7c3aed] text-white py-3.5 rounded-xl font-bold text-sm shadow-glow-purple transition-all duration-300 transform hover:-translate-y-0.5 disabled:opacity-50 disabled:cursor-not-allowed flex items-center justify-center gap-2 cursor-pointer mt-2"
           >
-            {isLoading ? "Signing In..." : "Sign In"}
+            {isLoading ? (
+              <>
+                <svg className="animate-spin h-4 w-4 text-white" fill="none" viewBox="0 0 24 24">
+                  <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="4" />
+                  <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z" />
+                </svg>
+                Signing In...
+              </>
+            ) : (
+              "Sign In ➔"
+            )}
           </button>
         </form>
 
-        {/* Divider OR */}
-        <div className="relative flex items-center justify-center my-6">
-          <div className="absolute inset-0 flex items-center">
-            <div className="w-full border-t border-[#2b214a]"></div>
-          </div>
-          <span className="relative px-3 bg-[#0c0915] text-[11px] font-bold text-text-muted uppercase tracking-wider">or</span>
+        {/* Divider */}
+        <div className="flex items-center my-6">
+          <div className="flex-grow border-t border-[#2b214a]/30"></div>
+          <span className="text-[10px] uppercase font-bold text-text-muted px-4 tracking-wider">Or continue with</span>
+          <div className="flex-grow border-t border-[#2b214a]/30"></div>
         </div>
 
         {/* Google SSO Button */}
@@ -172,15 +189,29 @@ export function LoginModal({ isOpen, onClose, onSuccess, onToggle }: ModalProps)
         {/* Disclaimer */}
         <p className="text-[10px] text-text-muted text-center leading-relaxed mt-6 border-t border-[#2b214a]/30 pt-4">
           By creating an account, you agree to our{" "}
-          <a href="#" className="text-accent-purple hover:underline">Terms of Service</a> and{" "}
-          <a href="#" className="text-accent-purple hover:underline">Privacy Policy</a> and agree to follow all platform rules.
+          <button
+            type="button"
+            onClick={() => onComingSoon?.("Terms of Service")}
+            className="text-accent-purple hover:underline bg-transparent border-none cursor-pointer p-0 font-semibold"
+          >
+            Terms of Service
+          </button>{" "}
+          and{" "}
+          <button
+            type="button"
+            onClick={() => onComingSoon?.("Privacy Policy")}
+            className="text-accent-purple hover:underline bg-transparent border-none cursor-pointer p-0 font-semibold"
+          >
+            Privacy Policy
+          </button>{" "}
+          and agree to follow all platform rules.
         </p>
       </div>
     </div>
   );
 }
 
-export function SignUpModal({ isOpen, onClose, onSuccess, onToggle }: ModalProps) {
+export function SignUpModal({ isOpen, onClose, onSuccess, onToggle, onComingSoon }: ModalProps) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [showPassword, setShowPassword] = useState(false);
@@ -349,8 +380,21 @@ export function SignUpModal({ isOpen, onClose, onSuccess, onToggle }: ModalProps
         <div className="text-[10px] text-text-muted text-center leading-relaxed mt-6 border-t border-[#2b214a]/30 pt-4 flex flex-col gap-2">
           <p>
             By creating an account, you agree to our{" "}
-            <a href="#" className="text-accent-purple hover:underline">Terms of Service</a> and{" "}
-            <a href="#" className="text-accent-purple hover:underline">Privacy Policy</a>.
+            <button
+              type="button"
+              onClick={() => onComingSoon?.("Terms of Service")}
+              className="text-accent-purple hover:underline bg-transparent border-none cursor-pointer p-0 font-semibold"
+            >
+              Terms of Service
+            </button>{" "}
+            and{" "}
+            <button
+              type="button"
+              onClick={() => onComingSoon?.("Privacy Policy")}
+              className="text-accent-purple hover:underline bg-transparent border-none cursor-pointer p-0 font-semibold"
+            >
+              Privacy Policy
+            </button>.
           </p>
           <p className="text-[9px] text-red-400/90 font-medium">
             Creating multiple accounts, using VPNs, emulators, or misusing offers is strictly prohibited.
@@ -360,3 +404,62 @@ export function SignUpModal({ isOpen, onClose, onSuccess, onToggle }: ModalProps
     </div>
   );
 }
+
+interface ComingSoonModalProps {
+  isOpen: boolean;
+  onClose: () => void;
+  featureName?: string;
+}
+
+export function ComingSoonModal({ isOpen, onClose, featureName = "This feature" }: ComingSoonModalProps) {
+  if (!isOpen) return null;
+
+  return (
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/75 backdrop-blur-md animate-fade-in p-4">
+      {/* Click outside to close wrapper */}
+      <div className="absolute inset-0" onClick={onClose}></div>
+      
+      <div className="relative w-full max-w-[420px] bg-[#0c0915] border border-card-border rounded-3xl p-8 shadow-[0_25px_60px_rgba(0,0,0,0.8)] overflow-hidden z-10 text-center flex flex-col items-center">
+        {/* Background glowing effects */}
+        <div className="absolute -top-20 -right-20 w-40 h-40 bg-accent-purple/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-20 -left-20 w-40 h-40 bg-accent-green/20 rounded-full blur-3xl pointer-events-none" />
+
+        <button
+          onClick={onClose}
+          className="absolute top-6 right-6 text-text-secondary hover:text-text-primary transition-colors cursor-pointer text-xl"
+        >
+          ✕
+        </button>
+
+        {/* Mascot Wrapper */}
+        <div className="relative w-36 h-36 mb-6 mt-2">
+          <Image
+            src="/binny_mascot.png"
+            alt="Binny Space Bunny Mascot"
+            fill
+            className="object-contain mix-blend-screen"
+            unoptimized
+          />
+        </div>
+
+        <h3 className="text-2xl font-extrabold font-display text-text-primary mb-2">
+          Coming Soon!
+        </h3>
+        <p className="text-accent-green font-semibold text-xs mb-4 uppercase tracking-wider">
+          {featureName}
+        </p>
+        <p className="text-sm text-text-secondary leading-relaxed mb-6">
+          Our space bunny is working hard to deploy this module. We will launch this feature in a future platform upgrade. Thank you for your patience! 🐰🛸
+        </p>
+
+        <button
+          onClick={onClose}
+          className="w-full py-3.5 bg-gradient-to-r from-accent-purple to-accent-green hover:opacity-90 text-white font-bold rounded-xl shadow-glow-purple transition-all duration-300 transform hover:-translate-y-0.5 cursor-pointer"
+        >
+          Awesome, Can't Wait!
+        </button>
+      </div>
+    </div>
+  );
+}
+

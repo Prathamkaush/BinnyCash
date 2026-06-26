@@ -2,9 +2,11 @@ import Image from "next/image";
 
 interface FooterProps {
   setView: (view: string) => void;
+  onComingSoon: (feature: string) => void;
+  onAnchorClick: (anchorId: string) => void;
 }
 
-export default function Footer({ setView }: FooterProps) {
+export default function Footer({ setView, onComingSoon, onAnchorClick }: FooterProps) {
   const handleLink = (view: string) => {
     setView(view);
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -34,15 +36,27 @@ export default function Footer({ setView }: FooterProps) {
             </p>
             {/* Mock Socials */}
             <div className="flex gap-3 mt-2">
-              <a href="#" className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary text-sm hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1">
+              <button
+                onClick={() => onComingSoon("X (Twitter) Channel")}
+                className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary text-sm hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1 cursor-pointer"
+                aria-label="X (Twitter)"
+              >
                 𝕏
-              </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary text-sm hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1">
+              </button>
+              <button
+                onClick={() => onComingSoon("Discord Server")}
+                className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary text-sm hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1 cursor-pointer"
+                aria-label="Discord"
+              >
                 💬
-              </a>
-              <a href="#" className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary text-sm hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1">
+              </button>
+              <button
+                onClick={() => onComingSoon("Telegram Channel")}
+                className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary text-sm hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1 cursor-pointer"
+                aria-label="Telegram"
+              >
                 ✈
-              </a>
+              </button>
             </div>
           </div>
 
@@ -57,14 +71,20 @@ export default function Footer({ setView }: FooterProps) {
                   </button>
                 </li>
                 <li>
-                  <a href="#features" className="hover:text-accent-green hover:translate-x-1 transition-all inline-block">
+                  <button
+                    onClick={() => onAnchorClick("features")}
+                    className="hover:text-accent-green hover:translate-x-1 transition-all inline-block bg-transparent border-none cursor-pointer text-left p-0 text-text-secondary text-xs"
+                  >
                     Why Choose Us
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#how-it-works" className="hover:text-accent-green hover:translate-x-1 transition-all inline-block">
+                  <button
+                    onClick={() => onAnchorClick("how-it-works")}
+                    className="hover:text-accent-green hover:translate-x-1 transition-all inline-block bg-transparent border-none cursor-pointer text-left p-0 text-text-secondary text-xs"
+                  >
                     How it Works
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -78,14 +98,20 @@ export default function Footer({ setView }: FooterProps) {
                   </button>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-accent-green hover:translate-x-1 transition-all">
+                  <button
+                    onClick={() => onComingSoon("Privacy Policy")}
+                    className="hover:text-accent-green hover:translate-x-1 transition-all bg-transparent border-none cursor-pointer text-left p-0 text-text-secondary text-xs"
+                  >
                     Privacy Policy
-                  </a>
+                  </button>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-accent-green hover:translate-x-1 transition-all">
+                  <button
+                    onClick={() => onComingSoon("Terms of Service")}
+                    className="hover:text-accent-green hover:translate-x-1 transition-all bg-transparent border-none cursor-pointer text-left p-0 text-text-secondary text-xs"
+                  >
                     Terms of Service
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>
@@ -94,9 +120,12 @@ export default function Footer({ setView }: FooterProps) {
               <h4 className="text-sm font-bold text-text-primary font-display">Support</h4>
               <ul className="flex flex-col gap-2.5 text-xs text-text-secondary list-none">
                 <li>
-                  <a href="#faqs" className="hover:text-accent-green hover:translate-x-1 transition-all">
+                  <button
+                    onClick={() => onAnchorClick("faqs")}
+                    className="hover:text-accent-green hover:translate-x-1 transition-all bg-transparent border-none cursor-pointer text-left p-0 text-text-secondary text-xs"
+                  >
                     FAQs
-                  </a>
+                  </button>
                 </li>
                 <li>
                   <a href="mailto:support@binnycash.com" className="hover:text-accent-green hover:translate-x-1 transition-all">
@@ -104,9 +133,12 @@ export default function Footer({ setView }: FooterProps) {
                   </a>
                 </li>
                 <li>
-                  <a href="#" className="hover:text-accent-green hover:translate-x-1 transition-all">
+                  <button
+                    onClick={() => onComingSoon("Community Chat")}
+                    className="hover:text-accent-green hover:translate-x-1 transition-all bg-transparent border-none cursor-pointer text-left p-0 text-text-secondary text-xs"
+                  >
                     Community Chat
-                  </a>
+                  </button>
                 </li>
               </ul>
             </div>

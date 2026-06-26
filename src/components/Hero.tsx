@@ -300,28 +300,28 @@ export default function Hero({ onStartEarning, language = "en" }: HeroProps) {
                   <div className="flex-1 space-y-2.5 overflow-y-auto pr-1 scrollbar-none">
                     <div className="flex items-center justify-between p-2.5 bg-bg-tertiary/40 border border-card-border rounded-xl">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold px-2 py-0.5 bg-accent-green/10 border border-accent-green/20 text-accent-green rounded-md">$0.00</span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 bg-accent-green/10 border border-accent-green/20 text-accent-green rounded-md">$0.50</span>
                         <span className="text-[10px] text-text-secondary font-medium">depth_reached100</span>
                       </div>
                       <Check className="w-3.5 h-3.5 text-accent-green" />
                     </div>
                     <div className="flex items-center justify-between p-2.5 bg-bg-tertiary/40 border border-card-border rounded-xl">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold px-2 py-0.5 bg-accent-green/10 border border-accent-green/20 text-accent-green rounded-md">$0.04</span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 bg-accent-green/10 border border-accent-green/20 text-accent-green rounded-md">$1.00</span>
                         <span className="text-[10px] text-text-secondary font-medium">depth_reached300</span>
                       </div>
                       <Check className="w-3.5 h-3.5 text-accent-green" />
                     </div>
                     <div className="flex items-center justify-between p-2.5 bg-bg-tertiary/40 border border-card-border rounded-xl">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold px-2 py-0.5 bg-accent-green/10 border border-accent-green/20 text-accent-green rounded-md">$0.34</span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 bg-accent-green/10 border border-accent-green/20 text-accent-green rounded-md">$1.88</span>
                         <span className="text-[10px] text-text-secondary font-medium">depth_reached500</span>
                       </div>
                       <Check className="w-3.5 h-3.5 text-accent-green" />
                     </div>
                     <div className="flex items-center justify-between p-2.5 bg-bg-tertiary/40 border border-card-border rounded-xl opacity-60">
                       <div className="flex items-center gap-2">
-                        <span className="text-[10px] font-bold px-2 py-0.5 bg-white/5 border border-white/10 text-text-primary rounded-md">$1.50</span>
+                        <span className="text-[10px] font-bold px-2 py-0.5 bg-white/5 border border-white/10 text-text-primary rounded-md">$3.00</span>
                         <span className="text-[10px] text-text-secondary font-medium">depth_reached1000</span>
                       </div>
                       <Lock className="w-3.5 h-3.5 text-text-muted" />
