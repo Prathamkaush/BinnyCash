@@ -14,6 +14,10 @@ import FaqAccordion from "@/components/FaqAccordion";
 import Footer from "@/components/Footer";
 import AboutUs from "@/components/AboutUs";
 import Dashboard from "@/components/Dashboard";
+import PrivacyPolicy from "@/components/PrivacyPolicy";
+import TermsOfService from "@/components/TermsOfService";
+import CommunityChat from "@/components/CommunityChat";
+import LiveSupport from "@/components/LiveSupport";
 import { LoginModal, SignUpModal, ComingSoonModal } from "@/components/Modals";
 
 export default function Home() {
@@ -189,6 +193,14 @@ export default function Home() {
 
         {currentView === "about" && <AboutUs />}
 
+        {currentView === "privacy" && <PrivacyPolicy />}
+
+        {currentView === "terms" && <TermsOfService />}
+
+        {currentView === "community" && <CommunityChat />}
+
+        {currentView === "support" && <LiveSupport />}
+
         {currentView === "dashboard" && user && (
           <Dashboard user={user} />
         )}
@@ -258,7 +270,7 @@ export default function Home() {
       >
         {/* Pulsing Outer Glow Ring */}
         <span className="absolute inset-0 rounded-full bg-[#24A1DE] opacity-40 animate-ping pointer-events-none" />
-        
+
         {/* Telegram Paper Plane Icon */}
         <svg
           viewBox="0 0 24 24"

@@ -189,7 +189,7 @@ export default function Footer({ setView, onComingSoon, onAnchorClick }: FooterP
                 </li>
                 <li>
                   <button
-                    onClick={() => onComingSoon("Privacy Policy")}
+                    onClick={() => handleLink("privacy")}
                     className="hover:text-accent-green hover:translate-x-1 transition-all bg-transparent border-none cursor-pointer text-left p-0 text-text-secondary text-xs"
                   >
                     Privacy Policy
@@ -197,7 +197,7 @@ export default function Footer({ setView, onComingSoon, onAnchorClick }: FooterP
                 </li>
                 <li>
                   <button
-                    onClick={() => onComingSoon("Terms of Service")}
+                    onClick={() => handleLink("terms")}
                     className="hover:text-accent-green hover:translate-x-1 transition-all bg-transparent border-none cursor-pointer text-left p-0 text-text-secondary text-xs"
                   >
                     Terms of Service
@@ -224,10 +224,18 @@ export default function Footer({ setView, onComingSoon, onAnchorClick }: FooterP
                 </li>
                 <li>
                   <button
-                    onClick={() => onComingSoon("Community Chat")}
+                    onClick={() => handleLink("community")}
                     className="hover:text-accent-green hover:translate-x-1 transition-all bg-transparent border-none cursor-pointer text-left p-0 text-text-secondary text-xs"
                   >
                     Community Chat
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => handleLink("support")}
+                    className="hover:text-accent-green hover:translate-x-1 transition-all bg-transparent border-none cursor-pointer text-left p-0 text-text-secondary text-xs"
+                  >
+                    live support
                   </button>
                 </li>
               </ul>
