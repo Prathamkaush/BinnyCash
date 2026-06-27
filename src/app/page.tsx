@@ -234,7 +234,7 @@ export default function Home() {
 
       {/* Sticky Call-To-Action Button on Scroll */}
       {currentView === "landing" && showStickyCTA && (
-        <div className="fixed bottom-6 right-6 md:right-8 z-40 animate-slide-up">
+        <div className="fixed bottom-6 right-24 md:right-28 z-40 animate-slide-up">
           <button
             onClick={handleStartEarning}
             className="flex items-center gap-2.5 px-6 py-4 bg-gradient-to-r from-accent-purple via-[#6d28d9] to-accent-green hover:opacity-95 text-white font-extrabold text-sm sm:text-base rounded-2xl shadow-[0_8px_32px_rgba(139,92,246,0.35)] border border-[#a78bfa]/30 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 active:translate-y-0 active:scale-100 cursor-pointer"
@@ -253,7 +253,7 @@ export default function Home() {
         href="https://t.me/binnycash_official"
         target="_blank"
         rel="noopener noreferrer"
-        className="fixed bottom-6 left-6 md:left-8 z-50 flex items-center justify-center w-14 h-14 bg-[#24A1DE] text-white rounded-full shadow-[0_8px_24px_rgba(36,161,222,0.45)] hover:shadow-[0_12px_32px_rgba(36,161,222,0.6)] border border-[#3fc5f0]/20 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 active:translate-y-0 active:scale-100 group cursor-pointer"
+        className="fixed bottom-6 right-6 md:right-8 z-50 flex items-center justify-center w-14 h-14 bg-[#24A1DE] text-white rounded-full shadow-[0_8px_24px_rgba(36,161,222,0.45)] hover:shadow-[0_12px_32px_rgba(36,161,222,0.6)] border border-[#3fc5f0]/20 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 active:translate-y-0 active:scale-100 group cursor-pointer"
         aria-label="Contact Telegram"
       >
         {/* Pulsing Outer Glow Ring */}
@@ -269,7 +269,7 @@ export default function Home() {
         </svg>
 
         {/* Hover Tooltip */}
-        <span className="absolute left-16 bg-[#0f172a] text-white text-[11px] font-bold px-3 py-1.5 rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-white/5 whitespace-nowrap">
+        <span className="absolute right-16 bg-[#0f172a] text-white text-[11px] font-bold px-3 py-1.5 rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-white/5 whitespace-nowrap">
           Join Telegram
         </span>
       </a>
