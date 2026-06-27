@@ -1,9 +1,9 @@
 export default function Stats() {
   const statsData = [
-    { value: "$182,490+", label: "Cash Rewards Paid", subtitle: "Guaranteed and verified" },
+    { value: "$100K+", label: "Cash Rewards Paid", subtitle: "Guaranteed and verified" },
     { value: "12,500+", label: "Active Earners", subtitle: "Working worldwide daily" },
     { value: "98.7%", label: "Instant Payout Rate", subtitle: "Within minutes of claim" },
-    { value: "145K+", label: "Tasks Completed", subtitle: "Surveys, games, and installs" },
+    { value: "25K+", label: "Tasks Completed", subtitle: "Surveys, games, and installs" },
   ];
 
   return (
