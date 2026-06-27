@@ -157,5 +157,16 @@ npm run lint
 
 ---
 
+## 🌐 Connect with Us
+
+Stay updated and join the BinnyCash community through our official channels:
+*   **X (formerly Twitter):** [@binnycash_com](https://x.com/binnycash_com)
+*   **Discord Server:** [Join our Discord](https://discord.gg/KrwPb6V8a)
+*   **LinkedIn Page:** [BinnyCash on LinkedIn](https://www.linkedin.com/company/binnycash/)
+*   **Instagram Profile:** [@binnycash_official](https://www.instagram.com/binnycash_official/)
+
+---
+
 ## 📜 License & Contributions
 BinnyCash is private property. All assets (including the custom SVG astronaut bunny, theme colors, and icons) are configured specifically for this micro-earning portal project. For feedback or inquiries, feel free to contact the maintainers.
+

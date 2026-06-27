@@ -247,6 +247,32 @@ export default function Home() {
           </button>
         </div>
       )}
+
+      {/* Floating Telegram Support Widget */}
+      <a
+        href="https://t.me/binnycash_official"
+        target="_blank"
+        rel="noopener noreferrer"
+        className="fixed bottom-6 left-6 md:left-8 z-50 flex items-center justify-center w-14 h-14 bg-[#24A1DE] text-white rounded-full shadow-[0_8px_24px_rgba(36,161,222,0.45)] hover:shadow-[0_12px_32px_rgba(36,161,222,0.6)] border border-[#3fc5f0]/20 transition-all duration-300 transform hover:-translate-y-1 hover:scale-105 active:translate-y-0 active:scale-100 group cursor-pointer"
+        aria-label="Contact Telegram"
+      >
+        {/* Pulsing Outer Glow Ring */}
+        <span className="absolute inset-0 rounded-full bg-[#24A1DE] opacity-40 animate-ping pointer-events-none" />
+        
+        {/* Telegram Paper Plane Icon */}
+        <svg
+          viewBox="0 0 24 24"
+          className="w-6.5 h-6.5 fill-white transition-transform duration-300 group-hover:rotate-12 group-hover:scale-110"
+          xmlns="http://www.w3.org/2000/svg"
+        >
+          <path d="M19.89 3.96L2.3 10.75c-1.2.48-1.19 1.15-.22 1.45l4.52 1.41 10.46-6.6c.49-.3.95-.14.58.19L9.13 14.97v4.18c.41 0 .59-.19.82-.41l1.97-1.92 4.1 3.03c.76.42 1.3.2 1.49-.71l2.69-12.67c.28-1.12-.43-1.63-1.31-1.31z" />
+        </svg>
+
+        {/* Hover Tooltip */}
+        <span className="absolute left-16 bg-[#0f172a] text-white text-[11px] font-bold px-3 py-1.5 rounded-lg opacity-0 pointer-events-none group-hover:opacity-100 transition-opacity duration-300 shadow-xl border border-white/5 whitespace-nowrap">
+          Join Telegram
+        </span>
+      </a>
     </div>
   );
 }

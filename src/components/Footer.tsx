@@ -1,5 +1,80 @@
 import Image from "next/image";
 
+// Custom Lucide-style Brand Icons
+const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z" />
+    <rect width="4" height="12" x="2" y="9" />
+    <circle cx="4" cy="4" r="2" />
+  </svg>
+);
+
+const InstagramIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <rect width="20" height="20" x="2" y="2" rx="5" ry="5" />
+    <path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z" />
+    <line x1="17.5" x2="17.51" y1="6.5" y2="6.5" />
+  </svg>
+);
+
+const XIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="15"
+    height="15"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2.5"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M4 4l11.733 16h4.267l-11.733 -16z" />
+    <path d="M4 20l6.768 -6.768m2.46 -2.46l6.772 -6.772" />
+  </svg>
+);
+
+const DiscordIcon = (props: React.SVGProps<SVGSVGElement>) => (
+  <svg
+    xmlns="http://www.w3.org/2000/svg"
+    width="16"
+    height="16"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    strokeWidth="2"
+    strokeLinecap="round"
+    strokeLinejoin="round"
+    {...props}
+  >
+    <path d="M9 10a1 1 0 1 0 0-2 1 1 0 0 0 0 2zm6 0a1 1 0 1 0 0-2 1 1 0 0 0 0 2z" />
+    <path d="M17.3 5.3A12.7 12.7 0 0 0 12 4a12.7 12.7 0 0 0 -5.3 1.3C4.1 6.8 2 10.3 2 14.3c0 2 1.3 3.9 3.3 4.5l1-1.8a10.6 10.6 0 0 1 -3.1 -1.5l.8-.7c1.7 1.5 4 2.5 6.7 2.7l.2-.2c-.3 0-.7-.2-1-.4a5 5 0 0 1 -.7-.8l.2-.2h.2c1.7.5 3.5.7 5.2.7h.2l.2.2a5 5 0 0 1 -.7.8 4.7 4.7 0 0 1 -1 .4l.2.2c2.7-.2 5-1.2 6.7-2.7l.8.7a10.6 10.6 0 0 1 -3.1 1.5l1 1.8c2-.6 3.3-2.5 3.3-4.5 0-4-2.1-7.5-4.7-9zm-8.3 8.2c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3 1.3.6 1.3 1.3-.6 1.3-1.3 1.3zm6 0c-.7 0-1.3-.6-1.3-1.3s.6-1.3 1.3-1.3 1.3.6 1.3 1.3-.6 1.3-1.3 1.3z" />
+  </svg>
+);
+
 interface FooterProps {
   setView: (view: string) => void;
   onComingSoon: (feature: string) => void;
@@ -36,27 +111,42 @@ export default function Footer({ setView, onComingSoon, onAnchorClick }: FooterP
             </p>
             {/* Mock Socials */}
             <div className="flex gap-3 mt-2">
-              <button
-                onClick={() => onComingSoon("X (Twitter) Channel")}
-                className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary text-sm hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1 cursor-pointer"
-                aria-label="X (Twitter)"
+              <a
+                href="https://x.com/binnycash_com"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1 cursor-pointer"
+                aria-label="X (formerly Twitter)"
               >
-                𝕏
-              </button>
-              <button
-                onClick={() => onComingSoon("Discord Server")}
-                className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary text-sm hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1 cursor-pointer"
+                <XIcon />
+              </a>
+              <a
+                href="https://discord.gg/KrwPb6V8a"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1 cursor-pointer"
                 aria-label="Discord"
               >
-                💬
-              </button>
-              <button
-                onClick={() => onComingSoon("Telegram Channel")}
-                className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary text-sm hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1 cursor-pointer"
-                aria-label="Telegram"
+                <DiscordIcon />
+              </a>
+              <a
+                href="https://www.linkedin.com/company/binnycash/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1 cursor-pointer"
+                aria-label="LinkedIn"
               >
-                ✈
-              </button>
+                <LinkedinIcon />
+              </a>
+              <a
+                href="https://www.instagram.com/binnycash_official/"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="w-9 h-9 rounded-full bg-bg-tertiary border border-card-border flex items-center justify-center text-text-primary hover:bg-accent-purple hover:border-accent-purple hover:text-white transition-all transform hover:-translate-y-1 cursor-pointer"
+                aria-label="Instagram"
+              >
+                <InstagramIcon />
+              </a>
             </div>
           </div>
 
