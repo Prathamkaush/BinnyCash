@@ -40,7 +40,7 @@ const PRESET_MESSAGES = [
 export default function CommunityChat() {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [inputText, setInputText] = useState("");
-  const chatEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   // Initialize with some mock messages
   useEffect(() => {
@@ -64,7 +64,9 @@ export default function CommunityChat() {
 
   // Scroll to bottom whenever messages list updates
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   // Simulate new users typing and posting messages periodically
@@ -259,7 +261,7 @@ export default function CommunityChat() {
           </div>
 
           {/* Messages Area */}
-          <div className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-4 scrollbar-thin">
+          <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 md:p-6 flex flex-col gap-4 scrollbar-thin">
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -291,7 +293,6 @@ export default function CommunityChat() {
                 </div>
               </div>
             ))}
-            <div ref={chatEndRef} />
           </div>
 
           {/* Input Form */}

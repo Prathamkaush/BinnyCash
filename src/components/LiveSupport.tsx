@@ -36,7 +36,7 @@ export default function LiveSupport() {
     },
   ]);
   const [inputText, setInputText] = useState("");
-  const chatEndRef = useRef<HTMLDivElement>(null);
+  const messagesContainerRef = useRef<HTMLDivElement>(null);
 
   // Support Ticket States
   const [category, setCategory] = useState("Survey Crediting");
@@ -48,7 +48,9 @@ export default function LiveSupport() {
   const [ticketSuccess, setTicketSuccess] = useState(false);
 
   useEffect(() => {
-    chatEndRef.current?.scrollIntoView({ behavior: "smooth" });
+    if (messagesContainerRef.current) {
+      messagesContainerRef.current.scrollTop = messagesContainerRef.current.scrollHeight;
+    }
   }, [messages]);
 
   const handleFAQClick = (faq: typeof FAQ_SUGGESTIONS[0]) => {
@@ -189,7 +191,7 @@ export default function LiveSupport() {
           </div>
 
           {/* Messages Window */}
-          <div className="flex-1 overflow-y-auto p-4 md:p-5 flex flex-col gap-4 scrollbar-thin">
+          <div ref={messagesContainerRef} className="flex-1 overflow-y-auto p-4 md:p-5 flex flex-col gap-4 scrollbar-thin">
             {messages.map((msg) => (
               <div
                 key={msg.id}
@@ -207,7 +209,6 @@ export default function LiveSupport() {
                 </div>
               </div>
             ))}
-            <div ref={chatEndRef} />
           </div>
 
           {/* Suggested FAQs Shortcuts */}
