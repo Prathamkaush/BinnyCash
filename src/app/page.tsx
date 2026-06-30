@@ -3,7 +3,8 @@
 import { useState, useEffect } from "react";
 import { Rocket } from "lucide-react";
 import Header from "@/components/Header";
-import Hero from "@/components/Hero";
+import MainHero from "@/components/MainHero";
+import InteractiveDemo from "@/components/InteractiveDemo";
 import LiveFeed from "@/components/LiveFeed";
 import Stats from "@/components/Stats";
 import Steps from "@/components/Steps";
@@ -180,10 +181,11 @@ export default function Home() {
               </svg>
             </div>
 
-            <Hero onStartEarning={handleStartEarning} language={language} />
+            <MainHero onStartEarning={handleStartEarning} language={language} />
             <LiveFeed />
             <Stats />
             <Steps language={language} />
+            <InteractiveDemo onStartEarning={handleStartEarning} language={language} />
             <Categories onStartEarning={handleStartEarning} />
             <ValueProps />
             <Testimonials />
