@@ -1,7 +1,5 @@
 "use client";
 
-import Image from "next/image";
-
 export default function AboutUs() {
   const pillars = [
     {
@@ -50,11 +48,10 @@ export default function AboutUs() {
 
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center mb-20">
         <div className="relative w-full h-[320px] md:h-[400px] border border-card-border rounded-3xl overflow-hidden shadow-2xl">
-          <Image
+          <img
             src="/logo.jpg"
             alt="BinnyCash Vision"
-            fill
-            className="object-cover opacity-70"
+            className="object-cover w-full h-full opacity-70"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-bg-primary via-transparent to-transparent" />
         </div>

@@ -1,5 +1,3 @@
-"use client";
-
 import { useState, useEffect } from "react";
 import { Rocket } from "lucide-react";
 import Header from "@/components/Header";
@@ -21,7 +19,7 @@ import CommunityChat from "@/components/CommunityChat";
 import LiveSupport from "@/components/LiveSupport";
 import { LoginModal, SignUpModal, ComingSoonModal } from "@/components/Modals";
 
-export default function Home() {
+export default function App() {
   const [currentView, setView] = useState<string>("landing");
   const [user, setUser] = useState<string | null>(null);
   const [isLoginOpen, setIsLoginOpen] = useState(false);
@@ -121,16 +119,18 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Global Navigation Bar */}
-      <Header
-        currentView={currentView}
-        setView={setView}
-        user={user}
-        onLogout={handleLogout}
-        onOpenLogin={() => setIsLoginOpen(true)}
-        onOpenSignUp={() => setIsSignUpOpen(true)}
-        currentLanguage={language}
-        onLanguageSelect={handleLanguageSelect}
-      />
+      {currentView !== "dashboard" && (
+        <Header
+          currentView={currentView}
+          setView={setView}
+          user={user}
+          onLogout={handleLogout}
+          onOpenLogin={() => setIsLoginOpen(true)}
+          onOpenSignUp={() => setIsSignUpOpen(true)}
+          currentLanguage={language}
+          onLanguageSelect={handleLanguageSelect}
+        />
+      )}
 
       {/* Render Main Content Panel depending on active view route */}
       <main className="flex-grow">
@@ -204,7 +204,7 @@ export default function Home() {
         {currentView === "support" && <LiveSupport />}
 
         {currentView === "dashboard" && user && (
-          <Dashboard user={user} />
+          <Dashboard user={user} setView={setView} onLogout={handleLogout} />
         )}
       </main>
 

@@ -1,7 +1,4 @@
-"use client";
-
 import { useState, useEffect } from "react";
-import Image from "next/image";
 import { translations } from "@/utils/translations";
 
 interface HeaderProps {
@@ -128,11 +125,10 @@ export default function Header({
           {/* Logo Brand Area */}
           <button onClick={() => navigateTo("landing")} className="flex items-center gap-2.5 bg-transparent border-none cursor-pointer">
             <div className="relative w-9 h-9 sm:w-10 sm:h-10 border-2 border-accent-green rounded-full overflow-hidden shadow-glow-green">
-              <Image
+              <img
                 src="/logo.jpg"
                 alt="BinnyCash Logo"
-                fill
-                className="object-cover"
+                className="object-cover w-full h-full"
               />
             </div>
             <span className="hidden sm:inline text-xl font-extrabold font-display bg-gradient-to-r from-white via-white to-accent-green light-theme:from-accent-purple light-theme:to-accent-green bg-clip-text text-transparent transition-all">

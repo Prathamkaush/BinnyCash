@@ -1,4 +1,3 @@
-import Image from "next/image";
 
 // Custom Lucide-style Brand Icons
 const LinkedinIcon = (props: React.SVGProps<SVGSVGElement>) => (
@@ -95,11 +94,10 @@ export default function Footer({ setView, onComingSoon, onAnchorClick }: FooterP
           <div className="lg:col-span-5 flex flex-col gap-4">
             <button onClick={() => handleLink("landing")} className="flex items-center gap-3 self-start bg-transparent border-none cursor-pointer">
               <div className="relative w-9 h-9 border border-accent-green rounded-full overflow-hidden">
-                <Image
+                <img
                   src="/logo.jpg"
                   alt="BinnyCash Logo"
-                  fill
-                  className="object-cover"
+                  className="object-cover w-full h-full"
                 />
               </div>
               <span className="text-lg font-bold font-display text-text-primary">

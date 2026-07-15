@@ -1,6 +1,9 @@
 @import "tailwindcss";
 
 :root {
+  --font-inter: "Inter", sans-serif;
+  --font-outfit: "Outfit", sans-serif;
+
   /* Dark Mode Variables (Default) */
   --bg-primary: #09070f;
   --bg-secondary: #120e21;
@@ -60,6 +63,9 @@
   
   --shadow-glow-purple: 0 0 20px rgba(139, 92, 246, 0.35);
   --shadow-glow-green: 0 0 20px rgba(16, 185, 129, 0.35);
+  
+  --font-sans: var(--font-inter);
+  --font-display: var(--font-outfit);
 }
 
 /* Animations & Custom Adjustments */

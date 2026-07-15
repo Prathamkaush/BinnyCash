@@ -1,7 +1,6 @@
 "use client";
 
 import { useState } from "react";
-import Image from "next/image";
 import { Mail, Lock, Eye, EyeOff } from "lucide-react";
 
 interface ModalProps {
@@ -433,12 +432,10 @@ export function ComingSoonModal({ isOpen, onClose, featureName = "This feature" 
 
         {/* Mascot Wrapper */}
         <div className="relative w-36 h-36 mb-6 mt-2">
-          <Image
+          <img
             src="/binny_mascot.png"
             alt="Binny Space Bunny Mascot"
-            fill
-            className="object-contain mix-blend-screen"
-            unoptimized
+            className="w-full h-full object-contain mix-blend-screen"
           />
         </div>
 
